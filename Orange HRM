@@ -1,0 +1,22 @@
+import unittest
+from selenium import webdriver
+
+class TestLogin(unittest.TestCase):
+    
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+        self.driver.get("https://orangehrm-demo-6x.orangehrmlive.com/")
+
+    def test_login_valid_credentials(self):
+        username = "admin"
+        password = "admin123"
+        self.driver.find_element_by_id("txtUsername").send_keys(username)
+        self.driver.find_element_by_id("txtPassword").send_keys(password)
+        self.driver.find_element_by_id("btnLogin").click()
+        self.assertTrue("Dashboard" in self.driver.title)
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
